@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import Page, sync_playwright
+from test_Data.api_data import api_testing_URL, api_key
 
 from pages.login_page import loginPageClass
 from pages.product_page import ProductsPage
@@ -33,3 +34,18 @@ def cart_page(page):
 @pytest.fixture()
 def checkout_page(page):
     return CheckoutPage(page)
+
+@pytest.fixture()
+def api_base_url():
+    return api_testing_URL
+
+@pytest.fixture()
+def api_headers():
+    return {"x-api-key": api_key}
+
+@pytest.fixture(scope="session")
+def api_request():
+    with sync_playwright() as p:
+        request_context = p.request.new_context()
+        yield request_context
+        request_context.dispose()
