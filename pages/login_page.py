@@ -4,9 +4,9 @@ import pytest
 class loginPageClass():
     def __init__(self, page: Page):
         self.page = page
-        self.userNameTextField = page.locator("//input[@placeholder='Username']")
-        self.passwordTextField = page.locator("//input[@placeholder='Password']")
-        self.signInButton = page.locator("//input[@id='login-button']")
+        self.userNameTextField = page.get_by_placeholder("Username")
+        self.passwordTextField = page.get_by_placeholder("Password")
+        self.signInButton = page.get_by_role("button", name="Login")
         self.lockedErrorMessage = page.locator("//h3[@data-test='error']")
 
     def login(self, username, password):

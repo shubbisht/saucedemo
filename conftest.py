@@ -43,7 +43,7 @@ def api_base_url():
 def api_headers():
     return {"x-api-key": api_key}
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def api_request():
     with sync_playwright() as p:
         request_context = p.request.new_context()
